@@ -121,6 +121,19 @@ public class Photo extends DataObject {
 	 * The default type is jpg
 	 */
 	protected String ending = "jpg";
+
+	/*
+	 * Location where this photo was taken.
+	 */
+	protected Coordinate location = new Coordinate(0, 0);
+
+	public Coordinate getLocation() {
+		return location;
+	}
+
+	public void setLocation(Coordinate newLocation) {
+		location = newLocation;
+	}
 	
 	/**
 	 *
