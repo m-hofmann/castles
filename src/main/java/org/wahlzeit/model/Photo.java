@@ -125,16 +125,16 @@ public class Photo extends DataObject {
 	/*
 	 * Location where this photo was taken.
 	 */
-	protected Coordinate location = new Coordinate(0, 0);
+	public Location location;
 
-	public Coordinate getLocation() {
+	public Location getLocation() {
 		return location;
 	}
 
-	public void setLocation(Coordinate newLocation) {
-		location = newLocation;
+	public void setLocation(Location location) {
+		this.location = location;
 	}
-	
+
 	/**
 	 *
 	 */
