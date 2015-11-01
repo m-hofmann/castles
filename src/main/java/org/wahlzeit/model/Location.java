@@ -29,6 +29,13 @@ public class Location {
         return name;
     }
 
+
+    /**
+     * Needed for Google App Engine integration
+     */
+    protected Location() {
+
+    }
     public Location(String name) {
         this.name = name;
     }
