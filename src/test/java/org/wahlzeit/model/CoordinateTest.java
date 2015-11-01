@@ -66,10 +66,8 @@ public class CoordinateTest {
 
     @Test
     public void testDistance() {
-        Coordinate distance = coordinateA.getDistance(coordinateB);
+        double distance = coordinateA.getDistance(coordinateB);
 
-        assertNotNull("Distance result was null", distance);
-        assertEquals(-0.5, distance.getLatitude(), epsilon);
-        assertEquals(1.3, distance.getLongitude(), epsilon);
+        assertEquals(154.72081192, distance, epsilon);
     }
 }
