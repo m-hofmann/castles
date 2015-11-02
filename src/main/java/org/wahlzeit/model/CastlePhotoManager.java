@@ -20,28 +20,25 @@ package org.wahlzeit.model;
  * <http://www.gnu.org/licenses/>.
  */
 
-public class Location {
-    public Coordinate coordinate;
+public class CastlePhotoManager extends PhotoManager {
 
-    private String name;
+    protected static final CastlePhotoManager instance = new CastlePhotoManager();
 
-    public String getName() {
-        return name;
-    }
+    @Override
+    public Photo getPhotoFromId(PhotoId id) {
+        if (id == null) {
+            return null;
+        }
 
+        Photo result = doGetPhotoFromId(id);
 
-    /**
-     * Needed for Google App Engine integration
-     */
-    protected Location() {
-    }
+        if (result == null) {
+            result = CastlePhotoFactory.getInstance().loadPhoto(id);
+            if (result != null) {
+                doAddPhoto(result);
+            }
+        }
 
-    public Location(String name) {
-        this.name = name;
-    }
-
-    public Location(String name, Coordinate coordinate) {
-        this(name);
-        this.coordinate = coordinate;
+        return result;
     }
 }

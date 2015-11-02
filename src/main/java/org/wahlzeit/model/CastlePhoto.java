@@ -20,28 +20,32 @@ package org.wahlzeit.model;
  * <http://www.gnu.org/licenses/>.
  */
 
-public class Location {
-    public Coordinate coordinate;
+import com.googlecode.objectify.annotation.Entity;
 
-    private String name;
-
-    public String getName() {
-        return name;
-    }
-
+@Entity
+public class CastlePhoto extends Photo {
+    // these are some example attributes for castle photos
 
     /**
-     * Needed for Google App Engine integration
+     * Name of the main architect.
      */
-    protected Location() {
+    public String architectName;
+
+    /**
+     * Name of the dominating architectural style of the castle.
+     */
+    public String styleName;
+
+    /**
+     * The main construction material used for the castle shown in the photo (sand stone, brick, ...).
+     */
+    public String mainConstructionMaterial;
+
+    public CastlePhoto() {
+        super();
     }
 
-    public Location(String name) {
-        this.name = name;
-    }
-
-    public Location(String name, Coordinate coordinate) {
-        this(name);
-        this.coordinate = coordinate;
+    public CastlePhoto(PhotoId id) {
+        super(id);
     }
 }

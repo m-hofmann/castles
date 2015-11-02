@@ -20,28 +20,32 @@ package org.wahlzeit.model;
  * <http://www.gnu.org/licenses/>.
  */
 
-public class Location {
-    public Coordinate coordinate;
+public class CastlePhotoFactory extends PhotoFactory {
+    private static CastlePhotoFactory instance = null;
 
-    private String name;
+    public static synchronized PhotoFactory getInstance() {
+        if (instance == null) {
+            setInstance(new CastlePhotoFactory());
+        }
 
-    public String getName() {
-        return name;
+        return instance;
     }
 
+    protected static synchronized void setInstance(CastlePhotoFactory photoFactory) {
+        if (instance != null) {
+            throw new IllegalStateException("attempt to initialize CastlePhotoFactory twice");
+        }
 
-    /**
-     * Needed for Google App Engine integration
-     */
-    protected Location() {
+        instance = photoFactory;
     }
 
-    public Location(String name) {
-        this.name = name;
+    @Override
+    public Photo createPhoto() {
+        return new CastlePhoto();
     }
 
-    public Location(String name, Coordinate coordinate) {
-        this(name);
-        this.coordinate = coordinate;
+    @Override
+    public Photo createPhoto(PhotoId id) {
+        return new CastlePhoto(id);
     }
 }
