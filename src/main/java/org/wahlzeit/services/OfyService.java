@@ -17,6 +17,9 @@ public class OfyService {
 	 * Register all entities at startup
 	 */
 	static {
+		factory().register(CartesianCoordinate.class);
+		factory().register(SphericCoordinate.class);
+		factory().register(Location.class);
 		factory().register(Photo.class);
 		factory().register(CastlePhoto.class);
 		factory().register(Globals.class);

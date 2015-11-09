@@ -8,20 +8,20 @@ import static org.junit.Assert.*;
 /*
  * Test cases for the Coordinate class.
  */
-public class CoordinateTest {
+public class SphericCoordinateTest {
 
     /**
      * Needed for assertEquals() on doubles, provides a boundary for floating point precision errors.
      */
     private final double epsilon = 0.000001;
 
-    private Coordinate coordinateA;
-    private Coordinate coordinateB;
+    private SphericCoordinate coordinateA;
+    private SphericCoordinate coordinateB;
 
     @Before
     public void setUp() {
-        coordinateA = new Coordinate(3, 4);
-        coordinateB = new Coordinate(2.5, 5.3);
+        coordinateA = new SphericCoordinate(3, 4, 6371);
+        coordinateB = new SphericCoordinate(2.5, 5.3, 6371);
     }
 
     @Test

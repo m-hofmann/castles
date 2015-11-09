@@ -20,7 +20,17 @@ package org.wahlzeit.model;
  * <http://www.gnu.org/licenses/>.
  */
 
+import com.googlecode.objectify.annotation.Container;
+import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.Id;
+
+@Entity
 public class Location {
+
+    @Id
+    Long id;
+
+    @Container
     public Coordinate coordinate;
 
     private String name;
@@ -42,6 +52,6 @@ public class Location {
 
     public Location(String name, Coordinate coordinate) {
         this(name);
-        this.coordinate = coordinate;
+        //this.coordinate = coordinate;
     }
 }
