@@ -23,7 +23,7 @@ package org.wahlzeit.model;
 import com.googlecode.objectify.annotation.Subclass;
 
 @Subclass
-public class CartesianCoordinate implements Coordinate {
+public class CartesianCoordinate extends AbstractCoordinate {
 
     //region Properties
 
@@ -73,15 +73,6 @@ public class CartesianCoordinate implements Coordinate {
     //endregion
 
     //region Interface Coordinate
-
-    @Override
-    public double getDistance(Coordinate other) {
-        if (other == null) {
-            throw new IllegalArgumentException("parameter other must not be null");
-        }
-
-        return CoordinateDistanceCalculation.getDistance(this, other);
-    }
 
     @Override
     public boolean isEqual(Coordinate other) {

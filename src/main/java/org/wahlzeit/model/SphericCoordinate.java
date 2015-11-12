@@ -6,7 +6,7 @@ import com.googlecode.objectify.annotation.Subclass;
  * Class representing a location on the globe.
  */
 @Subclass
-public class SphericCoordinate implements Coordinate {
+public class SphericCoordinate extends AbstractCoordinate {
 
     private double latitude;
 
@@ -56,23 +56,6 @@ public class SphericCoordinate implements Coordinate {
         this.latitude = latitude;
         this.longitude = longitude;
         this.radius = radius;
-    }
-
-    /**
-     * Calculate the distance between two points in kilometers.
-     * Does not provide very accurate results due to the formula used.
-     * @param other the coordinate to calculate the distance to
-     * @return a Coordinate object that represents the distance
-     * @throws IllegalArgumentException thrown if a null argument was passed.
-     * @methodtype get
-     */
-    @Override
-    public double getDistance(Coordinate other) {
-        if (other == null) {
-            throw new IllegalArgumentException("argument other must not be null");
-        }
-
-        return CoordinateDistanceCalculation.getDistance(this, other);
     }
 
     /**
