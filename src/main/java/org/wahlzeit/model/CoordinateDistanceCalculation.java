@@ -32,25 +32,30 @@ public class CoordinateDistanceCalculation {
      * @methodtype get
      */
     public static double getDistance(Coordinate from, Coordinate to) {
-        if (from == null || to == null) {
-            throw new IllegalArgumentException("Null argument not allowed.");
-        }
+        double distance;
+
+        assert from != null : "from coordinate was null";
+        assert to != null : "to coordinate was null";
 
         if (from instanceof CartesianCoordinate && to instanceof CartesianCoordinate) {
-            return getDistanceCartesian((CartesianCoordinate) from, (CartesianCoordinate) to);
+            distance =  getDistanceCartesian((CartesianCoordinate) from, (CartesianCoordinate) to);
         } else if (from instanceof SphericCoordinate && to instanceof SphericCoordinate) {
-            return getDistanceSpheric((SphericCoordinate) from, (SphericCoordinate) to);
+            distance = getDistanceSpheric((SphericCoordinate) from, (SphericCoordinate) to);
         } else if (from instanceof SphericCoordinate && to instanceof CartesianCoordinate) {
             CartesianCoordinate fromAsCartesian = createCartesianFromSpheric((SphericCoordinate) from);
 
-            return getDistanceCartesian(fromAsCartesian, (CartesianCoordinate) to);
+            distance = getDistanceCartesian(fromAsCartesian, (CartesianCoordinate) to);
         } else if (from instanceof CartesianCoordinate && to instanceof SphericCoordinate) {
             CartesianCoordinate toAsCartesian = createCartesianFromSpheric((SphericCoordinate) to);
 
-            return getDistanceCartesian((CartesianCoordinate) from, toAsCartesian);
+            distance = getDistanceCartesian((CartesianCoordinate) from, toAsCartesian);
         } else {
             throw new IllegalArgumentException("Unknown coordinate type passed, check if distance calculation has been implemented for this type");
         }
+
+        assert distance >= 0 : "negative values for distance are invalid";
+
+        return distance;
     }
 
     //endregion
@@ -80,9 +85,7 @@ public class CoordinateDistanceCalculation {
      * @methodtype get
      */
     private static double getDistanceSpheric(SphericCoordinate from, SphericCoordinate to) {
-        if (from.getRadius() != to.getRadius()) {
-            throw new IllegalArgumentException("Cannot calculate distances between coordinates not on the same planet.");
-        }
+        assert from.getRadius() == to.getRadius() : "Cannot calculate distances between coordinates not on the same planet.";
 
         double lat1 = Math.toRadians(from.getLatitude());
         double long1 = Math.toRadians(from.getLongitude());

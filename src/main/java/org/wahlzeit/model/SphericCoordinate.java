@@ -16,6 +16,8 @@ public class SphericCoordinate extends AbstractCoordinate {
 
     public void setLatitude(double latitude) {
         this.latitude = latitude;
+
+        assertClassInvariants();
     }
 
     private double longitude;
@@ -26,6 +28,8 @@ public class SphericCoordinate extends AbstractCoordinate {
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
+
+        assertClassInvariants();
     }
 
     private double radius;
@@ -36,6 +40,8 @@ public class SphericCoordinate extends AbstractCoordinate {
 
     public void setRadius(double radius) {
         this.radius = radius;
+
+        assertClassInvariants();
     }
 
     /**
@@ -56,6 +62,8 @@ public class SphericCoordinate extends AbstractCoordinate {
         this.latitude = latitude;
         this.longitude = longitude;
         this.radius = radius;
+
+        assertClassInvariants();
     }
 
     /**
@@ -65,9 +73,7 @@ public class SphericCoordinate extends AbstractCoordinate {
      * @methodtype get
      */
     public double getLatitudinalDistance(SphericCoordinate other) {
-        if (other == null) {
-            throw new IllegalArgumentException("argument other must not be null");
-        }
+        assert other != null : "argument other must not be null";
 
         return other.getLatitude() - this.getLatitude();
     }
@@ -79,11 +85,19 @@ public class SphericCoordinate extends AbstractCoordinate {
      * @methodtype get
      */
     public double getLongitudinalDistance(SphericCoordinate other) {
-        if (other == null) {
-            throw new IllegalArgumentException("argument other must not be null");
-        }
+        assert other != null : "argument other must not be null";
 
         return other.getLongitude() - this.getLongitude();
+    }
+
+    private void assertClassInvariants() {
+        assert latitude <= 90 : "latitude too large";
+        assert latitude >= -90 : "latitude too small";
+
+        assert longitude <= 180 : "longitude too large";
+        assert longitude >= 180 : "longitude too small";
+
+        assert radius > 0 : "invalid value for radius";
     }
 
     /**

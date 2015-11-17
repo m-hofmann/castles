@@ -31,10 +31,9 @@ public abstract class AbstractCoordinate implements Coordinate {
      */
     @Override
     public double getDistance(Coordinate other) {
-        if (other == null) {
-            throw new IllegalArgumentException("argument other must not be null");
-        }
 
-        return CoordinateDistanceCalculation.getDistance(this, other);
+        double distance = CoordinateDistanceCalculation.getDistance(this, other);
+
+        return distance;
     }
 }
