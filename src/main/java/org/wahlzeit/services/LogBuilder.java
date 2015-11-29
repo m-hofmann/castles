@@ -3,6 +3,7 @@ package org.wahlzeit.services;
 import org.wahlzeit.model.Client;
 import org.wahlzeit.model.UserManager;
 import org.wahlzeit.model.UserSession;
+import org.wahlzeit.utils.Pattern;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -17,6 +18,15 @@ import java.io.StringWriter;
  * 
  * @review
  */
+@Pattern(
+		name = "Builder", // a simpler version of the Builder pattern
+		participants = {
+				"Builder", // the same as the concrete builder: the LogBuilder
+				"ConcreteBuilder", // the LogBuilder
+				"Director", // all classes using the LogBuilder, for example: Agent, PhotoManager, ...
+				"Product", // in this case the string that is the result of this builder
+		}
+)
 public class LogBuilder {
 
 	protected static final String LEVEL = "level";
