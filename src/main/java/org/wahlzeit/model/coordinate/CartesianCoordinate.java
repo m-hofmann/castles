@@ -1,4 +1,4 @@
-package org.wahlzeit.model;
+package org.wahlzeit.model.coordinate;
 
 /*
  * Copyright (c) 2006-2009 by Dirk Riehle, http://dirkriehle.com
@@ -27,44 +27,59 @@ public class CartesianCoordinate extends AbstractCoordinate {
 
     //region Properties
 
-    private double x;
+    private final double x;
 
+    /**
+     * @methodtype get
+     */
     public double getX() {
         return x;
     }
 
-    public void setX(double x) {
-        this.x = x;
+    /**
+     * @methodtype set
+     */
+    public CartesianCoordinate setX(double x) {
+        return CoordinateFactory.CreateCartesian(x, y, z);
     }
 
-    private double y;
+    private final double y;
 
+    /**
+     * @methodtype get
+     */
     public double getY() {
         return y;
     }
 
-    public void setY(double y) {
-        this.y = y;
+    /**
+     * @methodtype set
+     */
+    public CartesianCoordinate setY(double y) {
+        return CoordinateFactory.CreateCartesian(x, y, z);
     }
 
-    private double z;
+    private final double z;
 
+    /**
+     * @methodtype get
+     */
     public double getZ() {
         return z;
     }
 
-    public void setZ(double z) {
-        this.z = z;
+    /**
+     * @methodtype set
+     */
+    public CartesianCoordinate setZ(double z) {
+        return CoordinateFactory.CreateCartesian(x, y, z);
     }
 
     //endregion
 
-    //region Constructors
+    //region Package-Local Constructors
 
-    private CartesianCoordinate() {
-    }
-
-    public CartesianCoordinate(double x, double y, double z) {
+    protected CartesianCoordinate(double x, double y, double z) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -74,6 +89,9 @@ public class CartesianCoordinate extends AbstractCoordinate {
 
     //region Interface Coordinate
 
+    /**
+     * @methodtype comparison
+     */
     @Override
     public boolean isEqual(Coordinate other) {
         return equals(other);
@@ -83,6 +101,9 @@ public class CartesianCoordinate extends AbstractCoordinate {
 
     //region Public methods
 
+    /**
+     * @methodtype comparison
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -96,6 +117,9 @@ public class CartesianCoordinate extends AbstractCoordinate {
 
     }
 
+    /**
+     * @methodtype get
+     */
     @Override
     public int hashCode() {
         int result;

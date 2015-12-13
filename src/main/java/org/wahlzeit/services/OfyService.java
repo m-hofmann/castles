@@ -4,6 +4,8 @@ import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyFactory;
 import com.googlecode.objectify.ObjectifyService;
 import org.wahlzeit.model.*;
+import org.wahlzeit.model.coordinate.CartesianCoordinate;
+import org.wahlzeit.model.coordinate.SphericCoordinate;
 import org.wahlzeit.model.persistence.DatastoreAdapter.ImageWrapper;
 
 /**

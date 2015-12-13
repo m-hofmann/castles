@@ -1,6 +1,26 @@
-package org.wahlzeit.model;
+package org.wahlzeit.model.coordinate;
 
 import com.googlecode.objectify.annotation.Subclass;
+
+/*
+ * Copyright (c) 2006-2009 by Dirk Riehle, http://dirkriehle.com
+ *
+ *  This file is part of the Wahlzeit photo rating application.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public
+ * License along with this program. If not, see
+ * <http://www.gnu.org/licenses/>.
+ */
 
 /**
  * Class representing a location on the globe.
@@ -8,48 +28,34 @@ import com.googlecode.objectify.annotation.Subclass;
 @Subclass
 public class SphericCoordinate extends AbstractCoordinate {
 
-    private double latitude;
+    private final double latitude;
 
     public double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
-
-        assertClassInvariants();
+    public SphericCoordinate setLatitude(double latitude) {
+        return CoordinateFactory.CreateSpheric(latitude, longitude, radius);
     }
 
-    private double longitude;
+    private final double longitude;
 
     public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
-
-        assertClassInvariants();
+    public SphericCoordinate setLongitude(double longitude) {
+        return CoordinateFactory.CreateSpheric(latitude, longitude, radius);
     }
 
-    private double radius;
+    private final double radius;
 
     public double getRadius() {
         return radius;
     }
 
-    public void setRadius(double radius) {
-        this.radius = radius;
-
-        assertClassInvariants();
-    }
-
-    /**
-     * Forbid using the constructor without parameters
-     * @methodtype constructor
-     */
-    private SphericCoordinate() {
-
+    public SphericCoordinate setRadius(double radius) {
+        return CoordinateFactory.CreateSpheric(latitude, longitude, radius);
     }
 
     /**
@@ -58,7 +64,7 @@ public class SphericCoordinate extends AbstractCoordinate {
      * @param longitude the longitude of the coordinate
      * @methodtype constructor
      */
-    public SphericCoordinate(double latitude, double longitude, double radius) {
+    protected SphericCoordinate(double latitude, double longitude, double radius) {
         this.latitude = latitude;
         this.longitude = longitude;
         this.radius = radius;
@@ -95,7 +101,7 @@ public class SphericCoordinate extends AbstractCoordinate {
         assert latitude >= -90 : "latitude too small";
 
         assert longitude <= 180 : "longitude too large";
-        assert longitude >= 180 : "longitude too small";
+        assert longitude >= -180 : "longitude too small";
 
         assert radius > 0 : "invalid value for radius";
     }

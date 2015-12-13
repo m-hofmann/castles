@@ -2,6 +2,8 @@ package org.wahlzeit.model;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.wahlzeit.model.coordinate.CoordinateFactory;
+import org.wahlzeit.model.coordinate.SphericCoordinate;
 
 import static org.junit.Assert.*;
 
@@ -20,8 +22,8 @@ public class SphericCoordinateTest {
 
     @Before
     public void setUp() {
-        coordinateA = new SphericCoordinate(3, 4, 6371);
-        coordinateB = new SphericCoordinate(2.5, 5.3, 6371);
+        coordinateA = CoordinateFactory.CreateSpheric(3, 4, 6371);
+        coordinateB = CoordinateFactory.CreateSpheric(2.5, 5.3, 6371);
     }
 
     @Test
@@ -32,14 +34,18 @@ public class SphericCoordinateTest {
 
     @Test
     public void testSetter() {
-        coordinateA.setLatitude(42);
-        coordinateA.setLongitude(23);
+        SphericCoordinate resultLat = coordinateA.setLatitude(42);
+        SphericCoordinate resultLatLon = resultLat.setLongitude(23);
 
-        assertEquals(42, coordinateA.getLatitude(), epsilon);
-        assertEquals(23, coordinateA.getLongitude(), epsilon);
+        assertEquals(3, coordinateA.getLatitude(), epsilon);
+        assertEquals(4, coordinateA.getLongitude(), epsilon);
+
+        assertEquals(42, resultLat.getLatitude(), epsilon);
+        assertEquals(42, resultLatLon.getLatitude(), epsilon);
+        assertEquals(23, resultLatLon.getLongitude(), epsilon);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = AssertionError.class)
     public void testDistanceWithNull() {
         coordinateA.getDistance(null);
     }
@@ -49,7 +55,7 @@ public class SphericCoordinateTest {
         assertEquals(-0.5, coordinateA.getLatitudinalDistance(coordinateB), epsilon);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = AssertionError.class)
     public void testLatitudinalDistanceWithNull() {
         coordinateA.getLatitudinalDistance(null);
     }
@@ -59,7 +65,7 @@ public class SphericCoordinateTest {
         assertEquals(1.3, coordinateA.getLongitudinalDistance(coordinateB), epsilon);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = AssertionError.class)
     public void testLongitudinalDistanceWithNull() {
         coordinateA.getLongitudinalDistance(null);
     }

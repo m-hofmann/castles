@@ -1,4 +1,6 @@
-package org.wahlzeit.model;
+package org.wahlzeit.model.coordinate;
+
+import com.googlecode.objectify.annotation.Entity;
 
 /*
  * Copyright (c) 2006-2009 by Dirk Riehle, http://dirkriehle.com
@@ -19,8 +21,6 @@ package org.wahlzeit.model;
  * License along with this program. If not, see
  * <http://www.gnu.org/licenses/>.
  */
-
-import com.googlecode.objectify.annotation.Entity;
 
 @Entity
 public interface Coordinate {

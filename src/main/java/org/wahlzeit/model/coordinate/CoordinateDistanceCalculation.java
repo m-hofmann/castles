@@ -1,4 +1,4 @@
-package org.wahlzeit.model;
+package org.wahlzeit.model.coordinate;
 
 /*
  * Copyright (c) 2006-2009 by Dirk Riehle, http://dirkriehle.com
@@ -42,11 +42,11 @@ public class CoordinateDistanceCalculation {
         } else if (from instanceof SphericCoordinate && to instanceof SphericCoordinate) {
             distance = getDistanceSpheric((SphericCoordinate) from, (SphericCoordinate) to);
         } else if (from instanceof SphericCoordinate && to instanceof CartesianCoordinate) {
-            CartesianCoordinate fromAsCartesian = createCartesianFromSpheric((SphericCoordinate) from);
+            CartesianCoordinate fromAsCartesian = CoordinateUtils.createCartesianFromSpheric((SphericCoordinate) from);
 
             distance = getDistanceCartesian(fromAsCartesian, (CartesianCoordinate) to);
         } else if (from instanceof CartesianCoordinate && to instanceof SphericCoordinate) {
-            CartesianCoordinate toAsCartesian = createCartesianFromSpheric((SphericCoordinate) to);
+            CartesianCoordinate toAsCartesian = CoordinateUtils.createCartesianFromSpheric((SphericCoordinate) to);
 
             distance = getDistanceCartesian((CartesianCoordinate) from, toAsCartesian);
         } else {
@@ -96,21 +96,6 @@ public class CoordinateDistanceCalculation {
         double centralAngle = Math.acos(Math.sin(lat1) * Math.sin(lat2) + Math.cos(lat1) * Math.cos(lat2) * Math.cos(long1 - long2));
 
         return from.getRadius() * centralAngle;
-    }
-
-    /**
-     * Calculates a cartesian coordinate from a spheric coordinate.
-     * @param coordinate the spheric coordinate to convert
-     * @return a new CartesianCoordinate
-     * @methodtype factory
-     */
-    private static CartesianCoordinate createCartesianFromSpheric(SphericCoordinate coordinate) {
-        // http://stackoverflow.com/a/1185413
-        double x = coordinate.getRadius() * Math.cos(coordinate.getLatitude()) * Math.cos(coordinate.getLongitude());
-        double y = coordinate.getRadius() * Math.cos(coordinate.getLatitude()) * Math.sin(coordinate.getLongitude());
-        double z = coordinate.getRadius() * Math.sin(coordinate.getLatitude());
-
-        return new CartesianCoordinate(x, y, z);
     }
 
     //endregion

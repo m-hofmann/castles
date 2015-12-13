@@ -1,4 +1,4 @@
-package org.wahlzeit.model;
+package org.wahlzeit.model.coordinate;
 
 /*
  * Copyright (c) 2006-2009 by Dirk Riehle, http://dirkriehle.com
@@ -20,39 +20,19 @@ package org.wahlzeit.model;
  * <http://www.gnu.org/licenses/>.
  */
 
-import com.googlecode.objectify.annotation.Container;
-import com.googlecode.objectify.annotation.Entity;
-import com.googlecode.objectify.annotation.Id;
-import org.wahlzeit.model.coordinate.Coordinate;
-
-@Entity
-public class Location {
-
-    @Id
-    Long id;
-
-    @Container
-    public Coordinate coordinate;
-
-    private String name;
-
-    public String getName() {
-        return name;
-    }
-
-
+class CoordinateUtils {
     /**
-     * Needed for Google App Engine integration
+     * Calculates a cartesian coordinate from a spheric coordinate.
+     * @param coordinate the spheric coordinate to convert
+     * @return a new CartesianCoordinate
+     * @methodtype factory
      */
-    protected Location() {
-    }
+    static CartesianCoordinate createCartesianFromSpheric(SphericCoordinate coordinate) {
+        // http://stackoverflow.com/a/1185413
+        double x = coordinate.getRadius() * Math.cos(coordinate.getLatitude()) * Math.cos(coordinate.getLongitude());
+        double y = coordinate.getRadius() * Math.cos(coordinate.getLatitude()) * Math.sin(coordinate.getLongitude());
+        double z = coordinate.getRadius() * Math.sin(coordinate.getLatitude());
 
-    public Location(String name) {
-        this.name = name;
-    }
-
-    public Location(String name, Coordinate coordinate) {
-        this(name);
-        //this.coordinate = coordinate;
+        return new CartesianCoordinate(x, y, z);
     }
 }
