@@ -23,7 +23,7 @@ package org.wahlzeit.model;
 public class CastlePhotoFactory extends PhotoFactory {
     private static CastlePhotoFactory instance = null;
 
-    public static synchronized PhotoFactory getInstance() {
+    public static synchronized CastlePhotoFactory getInstance() {
         if (instance == null) {
             setInstance(new CastlePhotoFactory());
         }
@@ -40,12 +40,12 @@ public class CastlePhotoFactory extends PhotoFactory {
     }
 
     @Override
-    public Photo createPhoto() {
+    public CastlePhoto createPhoto() {
         return new CastlePhoto();
     }
 
     @Override
-    public Photo createPhoto(PhotoId id) {
+    public CastlePhoto createPhoto(PhotoId id) {
         return new CastlePhoto(id);
     }
 }

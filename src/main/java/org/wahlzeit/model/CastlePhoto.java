@@ -24,25 +24,25 @@ import com.googlecode.objectify.annotation.Entity;
 
 @Entity
 public class CastlePhoto extends Photo {
-    // these are some example attributes for castle photos
-
     /**
-     * Name of the main architect.
+     * Type object pattern: reference to instance of Castle
      */
-    public String architectName;
+    private Castle castle;
 
-    /**
-     * Name of the dominating architectural style of the castle.
-     */
-    public String styleName;
+    public Castle getCastle() {
+        return this.castle;
+    }
 
-    /**
-     * The main construction material used for the castle shown in the photo (sand stone, brick, ...).
-     */
-    public String mainConstructionMaterial;
+    public void setCastle(Castle castle) {
+        this.castle = castle;
+    }
 
     public CastlePhoto() {
+    }
+
+    public CastlePhoto(Castle castle) {
         super();
+        this.castle = castle;
     }
 
     public CastlePhoto(PhotoId id) {

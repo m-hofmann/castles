@@ -20,9 +20,13 @@ package org.wahlzeit.model;
  * <http://www.gnu.org/licenses/>.
  */
 
+import java.util.HashMap;
+
 public class CastlePhotoManager extends PhotoManager {
 
     protected static final CastlePhotoManager instance = new CastlePhotoManager();
+
+    private final HashMap<String, CastleType> allCastleTypes = new HashMap<>();
 
     @Override
     public Photo getPhotoFromId(PhotoId id) {
@@ -40,5 +44,25 @@ public class CastlePhotoManager extends PhotoManager {
         }
 
         return result;
+    }
+
+    public CastleType getOrCreateCastleType(String name,
+                                       ArchitecturalStyle architecturalStyle,
+                                       GeographicalArea geographicalArea) {
+        if (allCastleTypes.containsKey(name)) {
+                return allCastleTypes.get(name);
+        }
+
+        synchronized (allCastleTypes) {
+            CastleType newType = new CastleType(name, architecturalStyle, geographicalArea);
+            allCastleTypes.put(name, newType);
+            return  newType;
+        }
+    }
+
+    public Castle createCastle(CastleType castleType) {
+        Castle newCastle = new Castle(castleType);
+        castleType.addInstance(newCastle);
+        return newCastle;
     }
 }

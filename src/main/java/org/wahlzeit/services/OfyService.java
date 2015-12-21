@@ -24,6 +24,8 @@ public class OfyService {
 		factory().register(Location.class);
 		factory().register(Photo.class);
 		factory().register(CastlePhoto.class);
+		factory().register(Castle.class);
+		factory().register(CastleType.class);
 		factory().register(Globals.class);
 		factory().register(Tag.class);
 		factory().register(User.class);
